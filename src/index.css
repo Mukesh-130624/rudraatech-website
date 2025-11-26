@@ -1,0 +1,10 @@
+html {
+  font-size: 18px; /* default 16px — increase for larger text */
+}
+
+body {
+  @apply font-sans text-gray-800 leading-relaxed;
+  /* font-family: "Inter", sans-serif; optional clean font */
+}
+
+@import "tailwindcss";
