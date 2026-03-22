@@ -1,0 +1,14 @@
+d1 = {3:'apple',1:'orange',2:'grapes'}
+# d2= {4:'ball',5:'bat',6:'football'}
+d1 = {}
+# lst1 = [1,2,3]
+# lst2 = ['a','b','c']
+for k in d1.keys():
+    if k in d1.keys():
+        print('dict is not empty')
+    else:
+        print('empty')
+    break
+
+
+

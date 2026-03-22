@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, NavLink } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
-const THEME_BG = 'bg-[#0f7cb1]';
+const THEME_BG = 'bg-white';
 
 export default function Navbar() {
     const [open, setOpen] = useState(false);
@@ -25,11 +25,12 @@ export default function Navbar() {
     }, []);
 
     return (
-        <header className={`${THEME_BG} text-white shadow-md fixed top-0 left-0 w-full z-50`}>
+        <header className={`${THEME_BG} shadow-md fixed top-0 left-0 w-full z-50`}>
 
-            <div className="container mx-auto px-4 py-2 flex justify-between items-center">
+            <div className="container mx-auto px-4 py-2 flex justify-between items-center 
+                font-sans text-base text-gray-600">
 
-                {/* Logo Section */}
+                {/* Logo */}
                 <Link to="/" className="flex items-center gap-3">
                     <div className="border border-white p-1 bg-white/20 rounded-md shadow-md">
                         <img
@@ -38,31 +39,54 @@ export default function Navbar() {
                             className="w-16 h-16 object-contain"
                         />
                     </div>
-                    <h1 className="text-xl font-bold tracking-widest">RUDRAA TECH</h1>
+                    <h1 className="text-xl tracking-widest text-blue-700 font-semibold">
+                        RUDRAA TECH
+                    </h1>
                 </Link>
 
                 {/* Desktop Menu */}
-                <nav className="hidden md:flex gap-8 items-center font-medium">
-                    <NavLink to="/" className={({ isActive }) => isActive ? 'underline' : ''}>Home</NavLink>
-                    <NavLink to="/who" className={({ isActive }) => isActive ? 'underline' : ''}>Who We Are</NavLink>
+                <nav className="hidden md:flex gap-8 items-center font-normal text-gray-600">
 
-                    {/* Dropdown */}
+                    <NavLink
+                        to="/"
+                        className={({ isActive }) =>
+                            isActive ? 'text-blue-700 underline' : 'hover:text-blue-700'
+                        }
+                    >
+                        Home
+                    </NavLink>
+
+                    <NavLink
+                        to="/who"
+                        className={({ isActive }) =>
+                            isActive ? 'text-blue-700 underline' : 'hover:text-blue-700'
+                        }
+                    >
+                        Who We Are
+                    </NavLink>
+
+                    {/* Services Dropdown */}
                     <div className="relative" ref={dropdownRef}>
-                        <button onClick={toggleDropdown} className="flex items-center gap-1">
+                        <button
+                            onClick={toggleDropdown}
+                            className="flex items-center gap-1 hover:text-blue-700 transition"
+                        >
                             Services ▾
                         </button>
 
                         {servicesOpen && (
                             <div className="absolute mt-3 bg-white text-black rounded-lg shadow-xl w-56 py-3 z-50">
                                 <Link
-                                    to="/services#pms"
+                                    to="/services"
+                                    state={{ scrollTo: "pms" }}
                                     className="block px-4 py-2 hover:bg-gray-200"
                                     onClick={() => setServicesOpen(false)}
                                 >
                                     PMS Services
                                 </Link>
                                 <Link
-                                    to="/services#engineering"
+                                    to="/services"
+                                    state={{ scrollTo: "engineering" }}
                                     className="block px-4 py-2 hover:bg-gray-200"
                                     onClick={() => setServicesOpen(false)}
                                 >
@@ -72,47 +96,69 @@ export default function Navbar() {
                         )}
                     </div>
 
-                    <NavLink to="/projects" className={({ isActive }) => isActive ? 'underline' : ''}>Projects</NavLink>
-                    <NavLink to="/contact" className={({ isActive }) => isActive ? 'underline' : ''}>Contact</NavLink>
+                    <NavLink
+                        to="/projects"
+                        className={({ isActive }) =>
+                            isActive ? 'text-blue-700 underline' : 'hover:text-blue-700'
+                        }
+                    >
+                        Projects
+                    </NavLink>
+
+                    {/* Contact Button */}
+                    <NavLink
+                        to="/contact"
+                        className="bg-blue-700 text-white px-4 py-2 rounded-md 
+                                   hover:bg-blue-800 transition"
+                    >
+                        Contact
+                    </NavLink>
                 </nav>
 
-                {/* Mobile Button */}
-                <button onClick={() => setOpen(!open)} className="md:hidden text-2xl">☰</button>
+                {/* Mobile Menu Button */}
+                <button onClick={() => setOpen(!open)} className="md:hidden text-2xl">
+                    ☰
+                </button>
             </div>
 
             {/* Mobile Menu */}
             {open && (
-                <div className="md:hidden flex flex-col bg-white text-black px-6 py-4 space-y-4 font-medium">
+                <div className="md:hidden flex flex-col bg-white text-black px-6 py-4 space-y-4 font-normal">
 
                     <Link to="/" onClick={() => setOpen(false)}>Home</Link>
                     <Link to="/who" onClick={() => setOpen(false)}>Who We Are</Link>
 
-                    {/* Mobile Dropdown */}
+                    {/* Mobile Services */}
                     <div>
-                        <button onClick={toggleDropdown} className="flex w-full justify-between">
+                        <button
+                            onClick={toggleDropdown}
+                            className="flex w-full justify-between hover:text-blue-700"
+                        >
                             Services ▾
                         </button>
 
                         {servicesOpen && (
-                            <div className="ml-4 mt-2 space-y-2">
+                            <div className="ml-4 mt-2 flex flex-col space-y-2">
                                 <Link
-                                    to="/services?p=pms"
-                                    className="block"
+                                    to="/services"
+                                    state={{ scrollTo: "pms" }}
                                     onClick={() => {
                                         setOpen(false);
                                         setServicesOpen(false);
                                     }}
+                                    className="block"
                                 >
                                     PMS Services
                                 </Link>
 
                                 <Link
-                                    to="/services?p=engineering"
-                                    className="block"
+                                    to="/services"
+                                    state={{ scrollTo: "engineering" }}
                                     onClick={() => {
                                         setOpen(false);
                                         setServicesOpen(false);
                                     }}
+                                    className="block"
                                 >
                                     Engineering Services
                                 </Link>
@@ -120,9 +166,15 @@ export default function Navbar() {
                         )}
                     </div>
 
-
                     <Link to="/projects" onClick={() => setOpen(false)}>Projects</Link>
-                    <Link to="/contact" onClick={() => setOpen(false)}>Contact</Link>
+
+                    <Link
+                        to="/contact"
+                        onClick={() => setOpen(false)}
+                        className="bg-blue-700 text-white px-4 py-2 rounded-md text-center"
+                    >
+                        Contact
+                    </Link>
                 </div>
             )}
         </header>

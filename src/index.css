@@ -1,3 +1,5 @@
+@import "tailwindcss";
+
 html {
   font-size: 18px; /* default 16px — increase for larger text */
 }
@@ -7,4 +9,18 @@ body {
   /* font-family: "Inter", sans-serif; optional clean font */
 }
 
-@import "tailwindcss";
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.animate-scroll {
+  display: flex;
+  width: max-content;
+  animation: scroll 18s linear infinite;
+  will-change: transform;
+}

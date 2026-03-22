@@ -11,7 +11,7 @@ export default function Contact() {
     const office = {
         address: "Office No-3 G.F, Building No-9, Yashvant Srusthi, Boisar, 401501",
         email: "saurabh.sankhe@rudraatech.in",
-        phone: "+91-9960449917",
+        // phone: "+91-9960449917",
         gstin: "27CSKPS3628A1ZO",
     };
 
@@ -34,7 +34,7 @@ export default function Contact() {
             <h2 className="font-heading text-center text-3xl md:text-4xl mb-6 tracking-wide">
                 Contact Us
             </h2>
-            <div className="w-24 h-1 bg-[#0f7cb1] mx-auto mb-10"></div>
+            <div className="w-24 h-1 bg-blue-700 mx-auto mb-10"></div>
             <div className="grid md:grid-cols-2 gap-10">
 
                 {/* ---- OFFICE BOX ---- */}
@@ -58,12 +58,12 @@ export default function Contact() {
                             </a>
                         </p>
 
-                        <p>
+                        {/* <p>
                             Phone:{" "}
                             <a href={`tel:${office.phone}`} className="underline hover:text-blue-600">
                                 {office.phone}
                             </a>
-                        </p>
+                        </p> */}
 
                         <p>GSTIN: {office.gstin}</p>
                     </div>
@@ -89,7 +89,7 @@ export default function Contact() {
                             className="w-full border p-3 rounded focus:ring-2 focus:ring-blue-400 outline-none"></textarea>
 
                         <button type="submit"
-                            className="w-full bg-[#0f7cb1] text-white py-3 rounded-md font-semibold hover:bg-[#0c5c82] transition-all tracking-wide">
+                            className="w-full bg-blue-700 text-white py-3 rounded-md font-semibold hover:bg-[#0c5c82] transition-all tracking-wide">
                             Send Message
                         </button>
                     </div>
